@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+        "name": "Python Debugger: Attach To Container",
+        "type": "python",
+        "request": "attach",
+        "connect": {
+            "host": "0.0.0.0",
+            "port": 6789
+        },
+        "pathMappings": [
+            {
+                "localRoot": "${workspaceFolder}",
+                "remoteRoot": "/app"
+            }
+        ],
+        "justMyCode": false
+    }
+  ]
+}
