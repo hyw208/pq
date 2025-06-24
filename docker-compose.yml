@@ -1,0 +1,36 @@
+services:
+  api:
+    build: .
+    image: pq
+    command: > 
+      sh -c "python -m debugpy --listen 0.0.0.0:6789 --wait-for-client -m uvicorn api:api --reload --host 0.0.0.0 --port 8000"
+      
+    environment:
+      - PYTHONUNBUFFERED=1  # Ensure Python output is unbuffered
+      - DB_IP=postgres
+      - DB_PORT=5432
+      - DB_NAME=alpha
+      - DB_USER=user
+      - DB_PASSWORD=password
+    ports:
+      - "8000:8000"
+      - "6789:6789"
+    volumes:
+      - .:/app
+    working_dir: /app
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=alpha
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:

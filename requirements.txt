@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+debugpy
+psycopg2 
+pydantic-core
+pydantic
